@@ -9,7 +9,6 @@ import os
 
 #base_dir="D:\\workspace\\set_desktop_bg\\" #directory to the main.py , get it by code dynamically is better
 base_dir = os.path.dirname(os.path.abspath(__file__))
-output_dir= base_dir+"\\img\\" # dir to images output 
 base_url="https://pixabay.com/api/"
 key="3847786-5a338eb8002ec90f2352269a4" #get your api key from here : https://pixabay.com/api/docs/
 q=""
