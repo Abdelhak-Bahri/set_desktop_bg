@@ -13,12 +13,12 @@ base_url="https://pixabay.com/api/"
 key="3847786-5a338eb8002ec90f2352269a4" #get your api key from here : https://pixabay.com/api/docs/
 q=""
 image_type="photo"
-size = 10 # number of pictures to download
+size = 0 # number of pictures to download
 
 def set_background(path):
     #print "setting ", path , "as bg"
     SPI_SETDESKWALLPAPER = 20
-    ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, path , 0)
+    ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, path , 2)
 
 #construct the link to fetch for pictures
 def get_link(query):
@@ -38,17 +38,20 @@ def get_images(query, size):
         # if size is unset , get all pictures on json 
         if size == 0 :
             size = json_object['totalHits']
+            #print size
         for i in range(size):
+            print i
             image_url = json_object['hits'][i]['webformatURL']
             image_url = image_url.replace("_640", "_960")
-            print image_url
+            #print image_url
             file_name = output_dir + str(json_object['hits'][i]['id']) + ".jpg"
-            print file_name
-            get_image = requests.get(image_url, stream=True)
-            if get_image.status_code == 200 :
-                with open(file_name, 'wb') as out_file:
-                    shutil.copyfileobj(get_image.raw, out_file)
-                del get_image
-            #set_background(file_name)
+            if not os.path.exists(os.path.abspath(file_name)):
+                print file_name
+                get_image = requests.get(image_url, stream=True)
+                if get_image.status_code == 200 :
+                    with open(file_name, 'wb') as out_file:
+                        shutil.copyfileobj(get_image.raw, out_file)
+
+		set_background(output_dir)
 #main call
 get_images(sys.argv[1],size)
