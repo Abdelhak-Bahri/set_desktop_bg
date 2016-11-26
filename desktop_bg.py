@@ -26,7 +26,7 @@ def get_link(query):
 
 #get images
 def get_images(query, size):
-    output_dir = base_dir + "\\" + query + "\\"
+    output_dir = base_dir + "\\output\\" + "\\" + query + "\\"
     if not os.path.exists(os.path.dirname(output_dir)):
         os.makedirs(os.path.dirname(output_dir))
     url = get_link(query)
@@ -51,7 +51,6 @@ def get_images(query, size):
                 if get_image.status_code == 200 :
                     with open(file_name, 'wb') as out_file:
                         shutil.copyfileobj(get_image.raw, out_file)
-
-		set_background(output_dir)
+		#set_background(output_dir)
 #main call
 get_images(sys.argv[1],size)
