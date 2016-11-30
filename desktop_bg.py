@@ -12,7 +12,7 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 base_url="https://pixabay.com/api/"
 key="3847786-5a338eb8002ec90f2352269a4" #get your api key from here : https://pixabay.com/api/docs/
 q=""
-image_type="photo"
+image_type="photo" # photo vector illustration all
 size = 0 # number of pictures to download
 per_page="200"
 
@@ -23,7 +23,7 @@ def set_background(path):
 
 #construct the link to fetch for pictures
 def get_link(query):
-    return base_url+'?key='+key+'&q='+query+'&per_page='+per_page
+    return base_url+'?key='+key+'&q='+query+'&image_type='+image_type+'&per_page='+per_page
 
 #get images
 def get_images(query, size):
